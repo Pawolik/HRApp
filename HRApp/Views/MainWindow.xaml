@@ -1,0 +1,48 @@
+﻿<mah:MetroWindow x:Class="HRApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:HRApp"
+        mc:Ignorable="d"
+        Title="HR Program" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Dodaj" Height="30" Width="100" Margin="5"/>
+            <Button Content="Edytuj" Height="30" Width="100" Margin="5"/>
+            <Button Content="Usuń" Height="30" Width="100" Margin="5"/>            
+            <ComboBox Height="30" Width="100"/>
+            <Button Content="Odśwież" Height="30" Width="100" Margin="5"/>
+            <Button Content="Ustawienia" Height="30" Width="100" Margin="5"/>
+        </StackPanel>
+        <DataGrid Grid.Row="1" 
+            Margin="5"
+            ItemsSource="{Binding Students}"
+            SelectedItem="{Binding SelectedStudent}"
+            CanUserAddRows="False"
+            IsReadOnly="True"
+            SelectionMode="Single"
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding FirstName}" Header="Imie"/>
+                <DataGridTextColumn Binding="{Binding LastName}" Header="Nazwisko"/>
+                <DataGridTextColumn Binding="{Binding PolishLang}" Header="E-mail"/>
+                <DataGridTextColumn Binding="{Binding Comments}" Header="Komentarze"/>
+                <DataGridTextColumn Binding="{Binding Group.Name}" Header="Dział"/>
+                <DataGridTextColumn Binding="{Binding Activities}" Header="Stanowisko"/>
+                <DataGridTextColumn Binding="{Binding Physics}" Header="Wynagrodzenie"/>
+                <DataGridTextColumn Binding="{Binding Maths}" Header="Data zatrudnienia"/>
+                <DataGridTextColumn Binding="{Binding Technology}" Header="Data zwolnienia"/>
+            </DataGrid.Columns>
+
+
+        </DataGrid>
+    </Grid>
+</mah:MetroWindow>
