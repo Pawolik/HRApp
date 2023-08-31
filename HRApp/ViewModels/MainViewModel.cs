@@ -1,5 +1,6 @@
 ﻿using HRApp.Commands;
 using HRApp.Models;
+using HRApp.Models.Wrappers;
 using HRApp.Views;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -18,6 +19,12 @@ namespace HRApp.ViewModels
     {
         public MainViewModel()
         {
+            using (var context = new ApplicationDbContext())
+            {
+                var employees = context.Employees.ToList();
+            }
+
+
             AddEmployeeCommand = new RelayCommand(AddEditEmployee);
             EditEmployeeComand = new RelayCommand(AddEditEmployee, CanEditDeleteEmployee);
             DeleteEmployeeCommand = new AsyncRelayCommand(DeleteEmployee, CanEditDeleteEmployee);
@@ -36,8 +43,8 @@ namespace HRApp.ViewModels
         public ICommand RefreshEmployeeCommand { get; set; }
         public ICommand SettingsEmployeeCommand { get; set; }
 
-        private Employee _selectedEmployee;
-        public Employee SelectedEmployee
+        private EmployeeWrapper _selectedEmployee;
+        public EmployeeWrapper SelectedEmployee
         {
             get { return _selectedEmployee; }
             set
@@ -78,8 +85,8 @@ namespace HRApp.ViewModels
         }*/
 
 
-        private ObservableCollection<Employee> _employee;
-        public ObservableCollection<Employee> Employee
+        private ObservableCollection<EmployeeWrapper> _employee;
+        public ObservableCollection<EmployeeWrapper> Employee
         {
             get { return _employee; }
             set
@@ -89,8 +96,8 @@ namespace HRApp.ViewModels
             }
         }
 
-        private ObservableCollection<Department> _department;
-        public ObservableCollection<Department> Departments
+        private ObservableCollection<DepartmentWrapper> _department;
+        public ObservableCollection<DepartmentWrapper> Departments
         {
             get { return _department; }
             set
@@ -100,8 +107,8 @@ namespace HRApp.ViewModels
             }
         }
 
-        private ObservableCollection<Models.Position> _position;
-        public ObservableCollection<Models.Position> Positions
+        private ObservableCollection<PositionWrapper> _position;
+        public ObservableCollection<PositionWrapper> Positions
         {
             get { return _position; }
             set
@@ -115,7 +122,7 @@ namespace HRApp.ViewModels
 
         private void AddEditEmployee(object obj)
         {
-            var addEditEmployeeWindow = new AddEditEmployeeView(obj as Employee);
+            var addEditEmployeeWindow = new AddEditEmployeeView(obj as EmployeeWrapper);
             addEditEmployeeWindow.Closed += addEditEmployeeWindow_Closed;
             addEditEmployeeWindow.ShowDialog();
         }
@@ -155,20 +162,20 @@ namespace HRApp.ViewModels
         }
         private void RefreshHRProgram()
         {
-            Employee = new ObservableCollection<Employee>
+            Employee = new ObservableCollection<EmployeeWrapper>
             {
-                new Employee
+                new EmployeeWrapper
                 {
                     FirstName = "Paweł",
                     LastName ="Jacewicz",
                     Email ="Test@Test",
                     Salary = 4500,
-                    Department = new Department
+                    Department = new DepartmentWrapper
                     {
                         ID = 1,
                         Name = "It"
                     },
-                    Position = new Models.Position
+                    Position = new PositionWrapper
                     {
                         ID=1,
                         Title = "Junior"
@@ -179,12 +186,12 @@ namespace HRApp.ViewModels
 
         private void InitDepartments()
         {
-            Departments = new ObservableCollection<Department>
+            Departments = new ObservableCollection<DepartmentWrapper>
             {
-                new Department {ID = 0, Name = "Wszystkie"},
+                new DepartmentWrapper {ID = 0, Name = "Wszystkie"},
 
-                new Department {ID = 1, Name = "IT"},
-                new Department {ID = 2, Name = "Finanse"}
+                new DepartmentWrapper {ID = 1, Name = "IT"},
+                new DepartmentWrapper {ID = 2, Name = "Finanse"}
             };
             SelectedDepartmentId = 0;
         }

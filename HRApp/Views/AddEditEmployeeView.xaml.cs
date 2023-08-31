@@ -1,4 +1,5 @@
 ﻿using HRApp.Models;
+using HRApp.Models.Wrappers;
 using HRApp.ViewModels;
 using MahApps.Metro.Controls;
 using System;
@@ -22,7 +23,7 @@ namespace HRApp.Views
     /// </summary>
     public partial class AddEditEmployeeView : MetroWindow
     {
-        public AddEditEmployeeView(Employee employee = null)
+        public AddEditEmployeeView(EmployeeWrapper employee = null)
         {
             InitializeComponent();
             DataContext = new AddEditEmployeeViewModel(employee);

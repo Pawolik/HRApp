@@ -1,5 +1,6 @@
 ﻿using HRApp.Commands;
 using HRApp.Models;
+using HRApp.Models.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,14 +15,14 @@ namespace HRApp.ViewModels
 {
     public class AddEditEmployeeViewModel : ViewModelBase
     {
-        public AddEditEmployeeViewModel(Employee employee = null)
+        public AddEditEmployeeViewModel(EmployeeWrapper employee = null)
         {
             CloseCommand = new RelayCommand(Close);
             ConfirmCommand = new RelayCommand(Confirm);
 
             if (employee == null)
             {
-                Employee = new Employee();
+                Employee = new EmployeeWrapper();
             }
             else
             {
@@ -36,9 +37,9 @@ namespace HRApp.ViewModels
         public ICommand CloseCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
 
-        private Employee _employee;
+        private EmployeeWrapper _employee;
 
-        public Employee Employee
+        public EmployeeWrapper Employee
         {
             get { return _employee; }
             set
@@ -59,8 +60,8 @@ namespace HRApp.ViewModels
             }
         }
 
-        private Employee _selectedEmployee;
-        public Employee SelectedEmployee
+        private EmployeeWrapper _selectedEmployee;
+        public EmployeeWrapper SelectedEmployee
         {
             get { return _selectedEmployee; }
             set
@@ -82,8 +83,8 @@ namespace HRApp.ViewModels
             }
         }
 
-        private ObservableCollection<Department> _department;
-        public ObservableCollection<Department> Departments
+        private ObservableCollection<DepartmentWrapper> _department;
+        public ObservableCollection<DepartmentWrapper> Departments
         {
             get { return _department; }
             set
@@ -128,12 +129,12 @@ namespace HRApp.ViewModels
         }
         private void InitDepartments()
         {
-            Departments = new ObservableCollection<Department>
+            Departments = new ObservableCollection<DepartmentWrapper>
             {
-                new Department {ID = 0, Name = "-- brak --"},
+                new DepartmentWrapper {ID = 0, Name = "-- brak --"},
 
-                new Department {ID = 1, Name = "IT"},
-                new Department {ID = 2, Name = "Finanse"}
+                new DepartmentWrapper {ID = 1, Name = "IT"},
+                new DepartmentWrapper {ID = 2, Name = "Finanse"}
             };
             Employee.Department.ID = 0;
         }

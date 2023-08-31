@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRApp.Models
+namespace HRApp.Models.Wrappers
 {
-    public class Employee
+    public class EmployeeWrapper
     {
-        public Employee()
+        public EmployeeWrapper()
         {
-           Department = new Department();
+           Department = new DepartmentWrapper();
         }
 
         public int ID { get; set; }
@@ -20,10 +20,10 @@ namespace HRApp.Models
         public string Comments { get; set; }
 
         public int DepartmentID { get; set; }  // Foreign Key
-        public Department Department { get; set; }  // Navigation Property
+        public DepartmentWrapper Department { get; set; }  // Navigation Property
 
         public int PositionID { get; set; }  // Foreign Key
-        public Position Position { get; set; }  // Navigation Property
+        public PositionWrapper Position { get; set; }  // Navigation Property
 
         public decimal Salary { get; set; }
         public DateTime HireDate { get; set; }

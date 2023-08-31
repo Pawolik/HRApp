@@ -38,6 +38,12 @@
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.4.4.0\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.2.4.10\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -48,6 +54,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
@@ -80,11 +88,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Commands\AsyncRelayCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Models\Department.cs" />
-    <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\Configurations\DepartmentConfiguration.cs" />
+    <Compile Include="Models\Configurations\EmployeeConfiguration.cs" />
+    <Compile Include="Models\Configurations\HRInformationConfiguration.cs" />
+    <Compile Include="Models\Configurations\PositionConfiguration.cs" />
+    <Compile Include="Models\Domains\Department.cs" />
+    <Compile Include="Models\Domains\Employee.cs" />
+    <Compile Include="Models\Domains\HRInformation.cs" />
+    <Compile Include="Models\Domains\Position.cs" />
+    <Compile Include="Models\Wrappers\DepartmentWrapper.cs" />
+    <Compile Include="Models\Wrappers\EmployeeWrapper.cs" />
+    <Compile Include="Models\Wrappers\PositionWrapper.cs" />
     <Compile Include="ViewModels\AddEditEmployeeViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -123,6 +140,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Converters\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

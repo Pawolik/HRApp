@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRApp.Models
+namespace HRApp.Models.Wrappers
 {
-    public class Department
+    public class PositionWrapper
     {
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string Title { get; set; }
         // Możesz dodać dodatkowe właściwości lub metody
     }
 }

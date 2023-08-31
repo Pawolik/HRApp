@@ -6,7 +6,7 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:HRApp.Views"
         mc:Ignorable="d"
-        Title="Dane Pracownika" Height="Auto" Width="400"
+        Title="Dane Pracownika" Height="500" Width="400"
         WindowStartupLocation="CenterScreen"
                  Name="AddEditEmployeeWindow">
     <Grid>
