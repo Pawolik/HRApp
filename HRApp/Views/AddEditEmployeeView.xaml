@@ -6,7 +6,9 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:HRApp.Views"
         mc:Ignorable="d"
-        Title="Dane Pracownika" Height="520" Width="400">
+        Title="Dane Pracownika" Height="Auto" Width="400"
+        WindowStartupLocation="CenterScreen"
+                 Name="AddEditEmployeeWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -27,39 +29,80 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="ID" Margin="5"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" />
+        <Label 
+            Visibility="{Binding IsUpdate, Converter={StaticResource BooleanToVisibilityConverter}}" 
+            Grid.Row="0" 
+            Content="ID" 
+            Margin="5"/>
+        <TextBox 
+            Visibility="{Binding IsUpdate, Converter={StaticResource BooleanToVisibilityConverter}}" 
+            Text="{Binding Employee.ID}" 
+            Grid.Row="0" 
+            Grid.Column="1" 
+            Margin="5" />
         
         <Label Grid.Row="1" Content="Imię" Margin="5"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" />
+        <TextBox Text="{Binding Employee.FirstName}" Grid.Row="1" Grid.Column="1" Margin="5" />
 
         <Label Grid.Row="2" Content="Nazwisko" Margin="5"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" />
+        <TextBox Text="{Binding Employee.LastName}" Grid.Row="2" Grid.Column="1" Margin="5" />
 
         <Label Grid.Row="3" Content="E-mail" Margin="5"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" />
+        <TextBox Text="{Binding Employee.Email}" Grid.Row="3" Grid.Column="1" Margin="5" />
 
         <Label Grid.Row="4" Content="Dział" Margin="5"/>
-        <ComboBox Grid.Row="4" Grid.Column="1" Margin="5" />
+        <ComboBox 
+            Grid.Row="4" 
+            Grid.Column="1" 
+            Margin="5" 
+            ItemsSource="{Binding Departments}"
+            SelectedValue="{Binding Employee.Department.ID}"
+            DisplayMemberPath="Name"
+            SelectedValuePath="ID"
+            />
 
         <Label Grid.Row="5" Content="Stanowisko" Margin="5"/>
-        <ComboBox Grid.Row="5" Grid.Column="1" Margin="5" />
+        <ComboBox 
+            Grid.Row="5" 
+            Grid.Column="1" 
+            Margin="5"
+            ItemsSource="{Binding Positions}"
+            SelectedValue="{Binding Employee.Position.ID}"
+            DisplayMemberPath="Name"
+            SelectedValuePath="ID"
+            />
 
         <Label Grid.Row="6" Content="Wynagrodzenie" Margin="5"/>
-        <TextBox Grid.Row="6" Grid.Column="1" Margin="5" />
+        <TextBox Text="{Binding Employee.Salary}" Grid.Row="6" Grid.Column="1" Margin="5" />
 
         <Label Grid.Row="7" Content="Data zatrudnienia" Margin="5"/>
-        <DatePicker Grid.Row="7" Grid.Column="1" Margin="5" />        
+        <DatePicker SelectedDate="{Binding HireDate}" Grid.Row="7" Grid.Column="1" Margin="5" />        
 
         <Label Grid.Row="8" Content="Data zwolnienia" Margin="5"/>
-        <DatePicker Grid.Row="8" Grid.Column="1" Margin="5" />
+        <DatePicker SelectedDate="{Binding TerminationDate}" Grid.Row="8" Grid.Column="1" Margin="5" />
 
         <Label Grid.Row="9" Content="Informarcje dodatkowe" Margin="5"/>
-        <TextBox Grid.Row="9" Grid.Column="1" Margin="5" />
+        <TextBox 
+            Text="{Binding Employee.Comments}"
+            TextWrapping="Wrap"
+            AcceptsReturn="True"
+            Grid.Row="9" 
+            Grid.Column="1" 
+            Margin="5" />
 
         <StackPanel Grid.Column="1" Grid.Row="11" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Zatwierdź" Margin="5" Width="100"/>
-            <Button Content="Anuluj" Margin="5" Width="100"/>
+            <Button 
+                Command="{Binding CloseCommand}"
+                CommandParameter="{Binding ElementName=AddEditEmployeeWindow}"
+                Content="Anuluj" 
+                Margin="5" 
+                Width="100"/>
+            <Button 
+                Command="{Binding ConfirmCommand}"
+                CommandParameter="{Binding ElementName=AddEditEmployeeWindow}"
+                Content="Potwierdź" 
+                Margin="5" 
+                Width="100"/>
         </StackPanel>
 
     </Grid>
