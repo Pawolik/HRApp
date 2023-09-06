@@ -1,5 +1,6 @@
 ﻿using HRApp.Commands;
 using HRApp.Models;
+using HRApp.Models.Domains;
 using HRApp.Models.Wrappers;
 using HRApp.Views;
 using MahApps.Metro.Controls;
@@ -12,19 +13,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Position = HRApp.Models.Domains.Position;
 
 namespace HRApp.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private Repository _repository = new Repository();
+
         public MainViewModel()
         {
-            using (var context = new ApplicationDbContext())
-            {
-                var employees = context.Employees.ToList();
-            }
-
-
             AddEmployeeCommand = new RelayCommand(AddEditEmployee);
             EditEmployeeComand = new RelayCommand(AddEditEmployee, CanEditDeleteEmployee);
             DeleteEmployeeCommand = new AsyncRelayCommand(DeleteEmployee, CanEditDeleteEmployee);
@@ -33,9 +31,9 @@ namespace HRApp.ViewModels
 
             RefreshHRProgram();
             InitDepartments();
+
         }
 
-        
 
         public ICommand AddEmployeeCommand { get; set; }
         public ICommand EditEmployeeComand { get; set; }
@@ -96,8 +94,8 @@ namespace HRApp.ViewModels
             }
         }
 
-        private ObservableCollection<DepartmentWrapper> _department;
-        public ObservableCollection<DepartmentWrapper> Departments
+        private ObservableCollection<Department> _department;
+        public ObservableCollection<Department> Departments
         {
             get { return _department; }
             set
@@ -107,8 +105,8 @@ namespace HRApp.ViewModels
             }
         }
 
-        private ObservableCollection<PositionWrapper> _position;
-        public ObservableCollection<PositionWrapper> Positions
+        private ObservableCollection<Position> _position;
+        public ObservableCollection<Position> Positions
         {
             get { return _position; }
             set
@@ -144,7 +142,7 @@ namespace HRApp.ViewModels
                 return;
             }
 
-            //Zwalnianie pracownika
+            _repository.DeleteEmployee(SelectedEmployee.ID);
 
             RefreshHRProgram();
         }
@@ -162,37 +160,28 @@ namespace HRApp.ViewModels
         }
         private void RefreshHRProgram()
         {
-            Employee = new ObservableCollection<EmployeeWrapper>
-            {
-                new EmployeeWrapper
-                {
-                    FirstName = "Paweł",
-                    LastName ="Jacewicz",
-                    Email ="Test@Test",
-                    Salary = 4500,
-                    Department = new DepartmentWrapper
-                    {
-                        ID = 1,
-                        Name = "It"
-                    },
-                    Position = new PositionWrapper
-                    {
-                        ID=1,
-                        Title = "Junior"
-                    }
-                }
-            };
+            Employee = new ObservableCollection<EmployeeWrapper>(_repository.GetEmployees(SelectedDepartmentId));
         }
 
         private void InitDepartments()
         {
-            Departments = new ObservableCollection<DepartmentWrapper>
-            {
-                new DepartmentWrapper {ID = 0, Name = "Wszystkie"},
+           var departments = _repository.GetDepartments();
+            departments.Insert(0, new Department { ID = 0, Name = "Wszystkie" });
 
-                new DepartmentWrapper {ID = 1, Name = "IT"},
-                new DepartmentWrapper {ID = 2, Name = "Finanse"}
-            };
+
+            Departments = new ObservableCollection<Department>(departments);
+
+            SelectedDepartmentId = 0;
+        }
+
+        private void InitPositions()
+        {
+            var positions = _repository.GetPositions();
+            positions.Insert(0, new Position { ID = 0, Title = "Wszystkie" });
+
+
+            Positions = new ObservableCollection<Position>(positions);
+
             SelectedDepartmentId = 0;
         }
     }
