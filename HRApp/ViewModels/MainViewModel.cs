@@ -95,7 +95,7 @@ namespace HRApp.ViewModels
 
 
         private ObservableCollection<EmployeeWrapper> _employee;
-        public ObservableCollection<EmployeeWrapper> Employee
+        public ObservableCollection<EmployeeWrapper> Employees
         {
             get { return _employee; }
             set
@@ -116,13 +116,13 @@ namespace HRApp.ViewModels
             }
         }
 
-        private ObservableCollection<Job> _workplace;
-        public ObservableCollection<Job> Workplaces
+        private ObservableCollection<Job> _job;
+        public ObservableCollection<Job> Jobs
         {
-            get { return _workplace; }
+            get { return _job; }
             set
             {
-                _workplace = value;
+                _job = value;
                 OnPropertyChanged();
             }
         }
@@ -153,7 +153,7 @@ namespace HRApp.ViewModels
                 return;
             }
 
-            _repository.DeleteEmployee(SelectedEmployee.ID);
+            _repository.ReleaseEmployee(SelectedEmployee.ID);
 
             RefreshHRProgram();
         }
@@ -171,7 +171,7 @@ namespace HRApp.ViewModels
         }
         private void RefreshHRProgram()
         {
-            Employee = new ObservableCollection<EmployeeWrapper>(_repository.GetEmployees(SelectedDepartmentId));
+            Employees = new ObservableCollection<EmployeeWrapper>(_repository.GetEmployees(SelectedDepartmentId));
         }
 
         private void InitDepartments()
@@ -184,6 +184,25 @@ namespace HRApp.ViewModels
 
             SelectedDepartmentId = 0;
         }
+
+        public void FilterEmployees(int filterType)
+        {
+            switch (filterType)
+            {
+                case 0:  // Wszyscy pracownicy
+                    Employees = new ObservableCollection<EmployeeWrapper>(_repository.GetEmployees(SelectedDepartmentId));
+                    break;
+                case 1:  // Tylko zatrudnieni
+                    Employees = new ObservableCollection<EmployeeWrapper>(_repository.GetEmployees(SelectedDepartmentId)
+                                                .Where(e => e.IsEmployed).ToList());
+                    break;
+                case 2:  // Tylko zwolnieni
+                    Employees = new ObservableCollection<EmployeeWrapper>(_repository.GetEmployees(SelectedDepartmentId)
+                                                .Where(e => !e.IsEmployed).ToList());
+                    break;
+            }
+        }
+
 
     }
 }

@@ -44,6 +44,18 @@
                 DisplayMemberPath="Name"
                 SelectedValuePath="ID"
                 />
+            <ComboBox  
+                Height="30" 
+                Width="Auto"
+                Margin="5"
+                x:Name="EmployeeFilterComboBox" 
+                SelectedIndex="0"
+                SelectionChanged="EmployeeFilterComboBox_SelectionChanged">
+                <ComboBoxItem>Wszyscy pracownicy</ComboBoxItem>
+                <ComboBoxItem>Tylko zatrudnieni</ComboBoxItem>
+                <ComboBoxItem>Tylko zwolnieni</ComboBoxItem>
+            </ComboBox>
+
             <Button 
                 Command="{Binding RefreshEmployeeCommand}" 
                 Content="Odśwież" 
@@ -56,15 +68,16 @@
                 Height="30" 
                 Width="100" 
                 Margin="5"/>
+            
         </StackPanel>
         <DataGrid Grid.Row="1" 
-            Margin="5"
-            ItemsSource="{Binding Employee}"
-            SelectedItem="{Binding SelectedEmployee}"
-            CanUserAddRows="False"
-            IsReadOnly="True"
-            SelectionMode="Single"
-            AutoGenerateColumns="False">
+          Margin="5"
+          ItemsSource="{Binding Employees}"
+          SelectedItem="{Binding SelectedEmployee}"
+          CanUserAddRows="False"
+          IsReadOnly="True"
+          SelectionMode="Single"
+          AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Visibility="Hidden"/>
                 <DataGridTextColumn Binding="{Binding FirstName}" Header="Imie"/>
@@ -77,8 +90,20 @@
                 <DataGridTextColumn Binding="{Binding HireDate, StringFormat=dd/MM/yyyy}" Header="Data zatrudnienia"/>
                 <DataGridTextColumn Binding="{Binding TerminationDate, StringFormat=dd/MM/yyyy}" Header="Data zwolnienia"/>
             </DataGrid.Columns>
-
-
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsEmployed}" Value="True">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="#CCCCCC" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsEmployed}" Value="False">
+                            <Setter Property="Background" Value="#660000" />
+                            <Setter Property="Foreground" Value="#FF6666" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
     </Grid>
 </mah:MetroWindow>

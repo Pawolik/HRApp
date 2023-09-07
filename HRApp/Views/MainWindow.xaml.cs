@@ -27,5 +27,18 @@ namespace HRApp.Views
             InitializeComponent();
             DataContext = new MainViewModel();
         }
+
+        private void EmployeeFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (EmployeeFilterComboBox == null || DataContext == null)
+            {
+                // Jeden z obiektów nie jest zainicjowany, więc wyjście z metody
+                return;
+            }
+
+            var vm = (MainViewModel)DataContext;
+            vm.FilterEmployees(EmployeeFilterComboBox.SelectedIndex);
+        }
+
     }
 }

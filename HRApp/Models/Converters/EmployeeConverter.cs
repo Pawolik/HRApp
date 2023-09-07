@@ -29,7 +29,10 @@ namespace HRApp.Models.Converters
                 {
                     ID = model.Job.ID,
                     Title = model.Job.Title
-                }
+                },
+                Salary = model.Salary,
+                HireDate = model.HireDate,
+                TerminationDate = model.TerminationDate,
             };
         }
 
@@ -44,6 +47,9 @@ namespace HRApp.Models.Converters
                 Comments = model.Comments,
                 DepartmentID = model.Department.ID,
                 JobID = model.Job.ID,
+                Salary = model.Salary,
+                HireDate = model.HireDate,
+                TerminationDate = model.TerminationDate,
             };
         }
     }

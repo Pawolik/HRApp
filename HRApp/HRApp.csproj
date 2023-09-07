@@ -110,15 +110,17 @@
     <Compile Include="Migrations\202309071616317_ChangingTheVariableVame.designer.cs">
       <DependentUpon>202309071616317_ChangingTheVariableVame.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202309071952176_AddEmployeeFields.cs" />
+    <Compile Include="Migrations\202309071952176_AddEmployeeFields.designer.cs">
+      <DependentUpon>202309071952176_AddEmployeeFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Configurations\DepartmentConfiguration.cs" />
     <Compile Include="Models\Configurations\EmployeeConfiguration.cs" />
-    <Compile Include="Models\Configurations\HRInformationConfiguration.cs" />
     <Compile Include="Models\Configurations\JobConfiguration.cs" />
     <Compile Include="Models\Converters\EmployeeConverter.cs" />
     <Compile Include="Models\Domains\Department.cs" />
     <Compile Include="Models\Domains\Employee.cs" />
-    <Compile Include="Models\Domains\HRInformation.cs" />
     <Compile Include="Models\Domains\Job.cs" />
     <Compile Include="Models\Wrappers\DepartmentWrapper.cs" />
     <Compile Include="Models\Wrappers\EmployeeWrapper.cs" />
@@ -160,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202309071616317_ChangingTheVariableVame.resx">
       <DependentUpon>202309071616317_ChangingTheVariableVame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309071952176_AddEmployeeFields.resx">
+      <DependentUpon>202309071952176_AddEmployeeFields.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

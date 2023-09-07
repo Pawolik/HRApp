@@ -33,6 +33,14 @@ namespace HRApp.Models.Wrappers
 
         private bool _isFirstNameValid;
         private bool _isLastNameValid;
+        private bool _isHireDateValid;
+        public bool IsEmployed
+        {
+            get
+            {
+                return TerminationDate == null;
+            }
+        }
         public string this[string columnName]
         {
             get
@@ -64,6 +72,18 @@ namespace HRApp.Models.Wrappers
                             _isLastNameValid = true;
                         }
                         break;
+                    case nameof(HireDate):
+                        if (HireDate < new DateTime(1753, 1, 1) || HireDate > new DateTime(9999, 12, 31))
+                        {
+                            Error = "Błędna data!";
+                            _isHireDateValid = false;
+                        }
+                        else
+                        {
+                            Error = string.Empty;
+                            _isHireDateValid = true;
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -77,7 +97,7 @@ namespace HRApp.Models.Wrappers
         {
             get
             {
-                return _isLastNameValid && _isFirstNameValid && Department.IsValid && Job.IsValid;
+                return _isLastNameValid && _isFirstNameValid && Department.IsValid && Job.IsValid && _isHireDateValid;
             }
         }
     }

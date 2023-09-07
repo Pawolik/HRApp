@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using HRApp.Models.Converters;
+using System.ComponentModel.DataAnnotations;
 
 namespace HRApp
 {
@@ -47,14 +48,25 @@ namespace HRApp
             }
         }
 
-        public void DeleteEmployee(int ID)
+        public void ReleaseEmployee(int ID)
         {
-            using(var context = new ApplicationDbContext())
+
+            // usuwanie pracownika
+            /*using(var context = new ApplicationDbContext())
             {
                 var employeeToDelete = context.Employees.Find(ID);
                 context.Employees.Remove(employeeToDelete);
                 context.SaveChanges();
+            }*/
+
+            //zwalnianie pracownika
+            using (var context = new ApplicationDbContext())
+            {
+                var employeeToRelease = context.Employees.Find(ID);
+                employeeToRelease.TerminationDate = DateTime.Today;
+                context.SaveChanges();
             }
+
         }
 
         public void UpdateEmployee(EmployeeWrapper employeeWrapper)
@@ -70,7 +82,9 @@ namespace HRApp
                 employeeToUpdate.Comments = employee.Comments;
                 employeeToUpdate.DepartmentID = employee.DepartmentID;
                 employeeToUpdate.JobID = employee.JobID;
-                //pozostałe dane
+                employeeToUpdate.Salary = employee.Salary;
+                employeeToUpdate.HireDate = employee.HireDate;
+                employeeToUpdate.TerminationDate = employee.TerminationDate;
                 context.SaveChanges();
             }
         }

@@ -34,7 +34,7 @@ namespace HRApp.ViewModels
             }
 
             InitDepartments();
-            InitWorkplaces();
+            InitJobs();
         }
 
 
@@ -124,7 +124,6 @@ namespace HRApp.ViewModels
             {
                 UpdateEmployee();
             }
-            //logika
             CloseWindow(obj as Window);
         }
 
@@ -159,7 +158,7 @@ namespace HRApp.ViewModels
             SelectedDepartmentId = Employee.Department.ID;
         }
 
-        private void InitWorkplaces()
+        private void InitJobs()
         {
             var workplaces = _repository.GetJobs();
             
