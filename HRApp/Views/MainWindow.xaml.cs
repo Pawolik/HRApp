@@ -32,7 +32,6 @@ namespace HRApp.Views
         {
             if (EmployeeFilterComboBox == null || DataContext == null)
             {
-                // Jeden z obiektów nie jest zainicjowany, więc wyjście z metody
                 return;
             }
 
