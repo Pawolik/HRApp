@@ -75,25 +75,6 @@ namespace HRApp.ViewModels
             }
         }
 
-        /*private decimal _salary;
-        public string Salary
-        {
-            get { return _salary.ToString(); }
-            set
-            {
-                if (decimal.TryParse(value, out decimal newSalary))
-                {
-                    _salary = newSalary;
-                    OnPropertyChanged("Salary"); // zakładając, że masz zaimplementowane INotifyPropertyChanged
-                }
-                else
-                {
-                    // logika obsługi błędów, np. ustawienie wartości na 0 lub wyświetlenie komunikatu
-                }
-            }
-        }*/
-
-
         private ObservableCollection<EmployeeWrapper> _employee;
         public ObservableCollection<EmployeeWrapper> Employees
         {
@@ -126,8 +107,6 @@ namespace HRApp.ViewModels
                 OnPropertyChanged();
             }
         }
-
-
 
         private void AddEditEmployee(object obj)
         {
@@ -167,7 +146,8 @@ namespace HRApp.ViewModels
         }
         private void SettingsEmployee(object obj)
         {
-
+            var settingsWindow = new SettingsWindow();
+            settingsWindow.ShowDialog();
         }
         private void RefreshHRProgram()
         {
