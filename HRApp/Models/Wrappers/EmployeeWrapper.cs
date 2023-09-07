@@ -10,7 +10,8 @@ namespace HRApp.Models.Wrappers
     {
         public EmployeeWrapper()
         {
-           Department = new DepartmentWrapper();
+            Department = new DepartmentWrapper();
+            Job = new JobWrapper();
         }
 
         public int ID { get; set; }
@@ -22,8 +23,8 @@ namespace HRApp.Models.Wrappers
         public int DepartmentID { get; set; }  // Foreign Key
         public DepartmentWrapper Department { get; set; }  // Navigation Property
 
-        public int PositionID { get; set; }  // Foreign Key
-        public PositionWrapper Position { get; set; }  // Navigation Property
+        public int JobID { get; set; }  // Foreign Key
+        public JobWrapper Job { get; set; }  // Navigation Property
 
         public decimal Salary { get; set; }
         public DateTime HireDate { get; set; }

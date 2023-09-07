@@ -66,9 +66,9 @@
             Grid.Row="5" 
             Grid.Column="1" 
             Margin="5"
-            ItemsSource="{Binding Positions}"
-            SelectedValue="{Binding Employee.Position.ID}"
-            DisplayMemberPath="Name"
+            ItemsSource="{Binding Jobs}"
+            SelectedValue="{Binding Employee.Job.ID}"
+            DisplayMemberPath="Title"
             SelectedValuePath="ID"
             />
 

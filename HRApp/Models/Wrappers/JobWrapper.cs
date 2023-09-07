@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HRApp.Models.Wrappers
 {
-    public class PositionWrapper
+    public class JobWrapper
     {
         public int ID { get; set; }
         public string Title { get; set; }

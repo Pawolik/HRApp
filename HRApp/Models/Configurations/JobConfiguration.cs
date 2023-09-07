@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HRApp.Models.Configurations
 {
-    public class PositionConfiguration : EntityTypeConfiguration<Position>
+    public class JobConfiguration : EntityTypeConfiguration<Job>
     {
-        public PositionConfiguration()
+        public JobConfiguration()
         {
-            ToTable("dbo.Positions");
+            ToTable("dbo.Workplaces");
 
             Property(x => x.ID)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);

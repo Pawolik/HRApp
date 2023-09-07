@@ -25,10 +25,10 @@ namespace HRApp.Models.Converters
                     ID = model.Department.ID,
                     Name = model.Department.Name
                 },
-                Position = new PositionWrapper
+                Job = new JobWrapper
                 {
-                    ID = model.Position.ID,
-                    Title = model.Position.Title
+                    ID = model.Job.ID,
+                    Title = model.Job.Title
                 }
             };
         }
@@ -43,7 +43,7 @@ namespace HRApp.Models.Converters
                 Email = model.Email,
                 Comments = model.Comments,
                 DepartmentID = model.Department.ID,
-                //Position = new Position { ID = model.Position.ID }
+                JobID = model.Job.ID,
             };
         }
     }

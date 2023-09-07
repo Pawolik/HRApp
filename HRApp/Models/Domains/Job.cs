@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace HRApp.Models.Domains
 {
-    public class Position
+    public class Job
     {
-        public Position()
+        public Job()
         {
             Employees = new Collection<Employee>();
         }

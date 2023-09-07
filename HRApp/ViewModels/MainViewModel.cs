@@ -13,7 +13,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Position = HRApp.Models.Domains.Position;
 
 namespace HRApp.ViewModels
 {
@@ -64,6 +63,18 @@ namespace HRApp.ViewModels
             }
         }
 
+        private int _selectedWorkplaceId;
+
+        public int SelectedWorkplaceId
+        {
+            get { return _selectedWorkplaceId; }
+            set
+            {
+                _selectedWorkplaceId = value;
+                OnPropertyChanged();
+            }
+        }
+
         /*private decimal _salary;
         public string Salary
         {
@@ -105,13 +116,13 @@ namespace HRApp.ViewModels
             }
         }
 
-        private ObservableCollection<Position> _position;
-        public ObservableCollection<Position> Positions
+        private ObservableCollection<Job> _workplace;
+        public ObservableCollection<Job> Workplaces
         {
-            get { return _position; }
+            get { return _workplace; }
             set
             {
-                _position = value;
+                _workplace = value;
                 OnPropertyChanged();
             }
         }
@@ -174,15 +185,5 @@ namespace HRApp.ViewModels
             SelectedDepartmentId = 0;
         }
 
-        private void InitPositions()
-        {
-            var positions = _repository.GetPositions();
-            positions.Insert(0, new Position { ID = 0, Title = "Wszystkie" });
-
-
-            Positions = new ObservableCollection<Position>(positions);
-
-            SelectedDepartmentId = 0;
-        }
     }
 }

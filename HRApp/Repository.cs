@@ -20,11 +20,11 @@ namespace HRApp
             }
         }
 
-        public List<Position> GetPositions()
+        public List<Job> GetJobs()
         {
             using (var context = new ApplicationDbContext())
             {
-                return context.Positions.ToList();
+                return context.Workplaces.ToList();
             }
         }
 
@@ -35,14 +35,13 @@ namespace HRApp
                 var employees = context
                     .Employees
                     .Include(x => x.Department)
-                    .Include(x => x.Position)
+                    .Include(x => x.Job)
                     .AsQueryable();
 
                 if (departmentID != 0)
                 {
                     employees = employees.Where(x =>  x.DepartmentID == departmentID);
                 }
-
 
                 return employees.ToList().Select( x => x.ToWrapper()).ToList();
             }
@@ -70,7 +69,7 @@ namespace HRApp
                 employeeToUpdate.Email = employee.Email;
                 employeeToUpdate.Comments = employee.Comments;
                 employeeToUpdate.DepartmentID = employee.DepartmentID;
-                employeeToUpdate.PositionID = employee.PositionID;
+                employeeToUpdate.JobID = employee.JobID;
                 //pozostałe dane
                 context.SaveChanges();
             }
@@ -79,8 +78,6 @@ namespace HRApp
         public void AddEmployee(EmployeeWrapper employeeWrapper)
         {
             var employee = employeeWrapper.ToDao();
-
-
 
             using (var context = new ApplicationDbContext())
             {

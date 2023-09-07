@@ -14,10 +14,10 @@ namespace HRApp.Models.Domains
         public string Email { get; set; }
         public string Comments { get; set; }
         public int DepartmentID { get; set; }
-        public int PositionID { get; set; }
-
-
         public Department Department { get; set; }
-        public Position Position { get; set; }
+        public int JobID { get; set; }
+        public Job Job { get; set; }
+
+
     }
 }

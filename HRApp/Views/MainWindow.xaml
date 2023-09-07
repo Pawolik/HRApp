@@ -72,7 +72,7 @@
                 <DataGridTextColumn Binding="{Binding Email}" Header="E-mail"/>
                 <DataGridTextColumn Binding="{Binding Comments}" Header="Komentarze"/>
                 <DataGridTextColumn Binding="{Binding Department.Name}" Header="Dział"/>
-                <DataGridTextColumn Binding="{Binding Position.Title}" Header="Stanowisko"/>
+                <DataGridTextColumn Binding="{Binding Job.Title}" Header="Stanowisko"/>
                 <DataGridTextColumn Binding="{Binding Salary}" Header="Wynagrodzenie"/>
                 <DataGridTextColumn Binding="{Binding HireDate, StringFormat=dd/MM/yyyy}" Header="Data zatrudnienia"/>
                 <DataGridTextColumn Binding="{Binding TerminationDate, StringFormat=dd/MM/yyyy}" Header="Data zwolnienia"/>

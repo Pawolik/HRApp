@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using Position = HRApp.Models.Domains.Position;
 
 namespace HRApp.ViewModels
 {
@@ -35,7 +34,7 @@ namespace HRApp.ViewModels
             }
 
             InitDepartments();
-            InitPositions();
+            InitWorkplaces();
         }
 
 
@@ -99,13 +98,13 @@ namespace HRApp.ViewModels
             }
         }
 
-        private ObservableCollection<Position> _position;
-        public ObservableCollection<Position> Positions
+        private ObservableCollection<Job> _job;
+        public ObservableCollection<Job> Jobs
         {
-            get { return _position; }
+            get { return _job; }
             set
             {
-                _position = value;
+                _job = value;
                 OnPropertyChanged();
             }
         }
@@ -152,17 +151,14 @@ namespace HRApp.ViewModels
 
             Departments = new ObservableCollection<Department>(departments);
 
-            Employee.Department.ID = 0;
+            SelectedDepartmentId = Employee.Department.ID;
         }
 
-        private void InitPositions()
+        private void InitWorkplaces()
         {
-            var positions = _repository.GetPositions();
-            //positions.Insert(0, new Position { ID = 0, Title = "-- brak --" });
-
-
-            Positions = new ObservableCollection<Position>(positions);
-
+            var workplaces = _repository.GetJobs();
+            
+            Jobs = new ObservableCollection<Job>(workplaces);
         }
     }
 }
