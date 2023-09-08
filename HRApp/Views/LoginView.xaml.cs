@@ -17,6 +17,8 @@ namespace HRApp.Views
             if (LoginTextBox.Text == "admin" && PasswordTextBox.Password == "a")
             {
                 var mainWindow = new MainWindow();
+                Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                Application.Current.MainWindow = mainWindow;
                 mainWindow.Show();
                 this.Close();
             }
